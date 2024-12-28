@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Museum Lobby</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: black; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/MTLLoader.js"></script>
+</head>
+<body>
+<script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 10, 5).normalize();
+    scene.add(directionalLight);
+
+    // Avatar settings
+    let avatar, avatarSpeed = 0.05;
+    const mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load('/mnt/data/Animal crossing character.mtl', (materials) => {
+        materials.preload();
+        const objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+        objLoader.load('/mnt/data/Animal crossing character.obj', (object) => {
+            avatar = object;
+            avatar.scale.set(0.3, 0.3, 0.3);  // Adjust size as needed
+            avatar.position.set(0, 0, 0);     // Starting position
+            scene.add(avatar);
+        });
+    });
+
+    // Camera initial position
+    camera.position.set(0, 2, 5);
+
+    // Movement control variables
+    const keys = { w: false, a: false, s: false, d: false };
+    document.addEventListener('keydown', (event) => keys[event.key.toLowerCase()] = true);
+    document.addEventListener('keyup', (event) => keys[event.key.toLowerCase()] = false);
+
+    // Update function
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Movement logic
+        if (avatar) {
+            if (keys.w) avatar.position.z -= avatarSpeed;
+            if (keys.s) avatar.position.z += avatarSpeed;
+            if (keys.a) avatar.position.x -= avatarSpeed;
+            if (keys.d) avatar.position.x += avatarSpeed;
+
+            // Make the camera follow the avatar
+            camera.position.x = avatar.position.x;
+            camera.position.z = avatar.position.z + 5;  // Offset to follow from behind
+            camera.lookAt(avatar.position);
+        }
+        
+        renderer.render(scene, camera);
+    }
+
+    // Handle window resizing
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+
+    animate();
+</script>
+</body>
+</html>

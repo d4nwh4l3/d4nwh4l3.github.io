@@ -1,0 +1,52 @@
+# Blender 4.2.3 LTS MTL File: 'title.blend'
+# www.blender.org
+
+newmtl mat_0-tex_dobj_museum_main.jpg
+Ns 9.849158
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd tex_dobj_museum_main.jpg
+
+newmtl mat_1-tex_dobj_museum_stone.jpg
+Ns 9.849158
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd tex_dobj_museum_stone.jpg
+
+newmtl mat_2-tex_dobj_museum_stone.jpg
+Ns 9.849158
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd tex_dobj_museum_stone.jpg
+
+newmtl mat_3-tex_dobj_museum_main.jpg
+Ns 9.849158
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd tex_dobj_museum_main.jpg
+
+newmtl mat_4-default-grey.jpg
+Ns 9.849158
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd default-grey.jpg
