@@ -1,0 +1,1238 @@
+<!-- Code For Musée | Author: Daniel Hiss | ENGLIT 1922 DNID Capstone | Dr. Jessica FitzPatrick -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Beginning of Project - Adding Reactive Scaling -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Website Header and Title Screen -->
+    <title>Musée</title>
+
+    <!-- Styling for Project -->
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .floating-text,
+        .click-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        
+        .floating-text {
+            top: 10vh;
+            font-family: 'Dancing Script', cursive;
+            font-size: 8vw;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .click-text {
+            top: 90vh;
+            font-family: Arial, sans-serif;
+            font-size: 1.8vw;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        #fade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, -10px);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Title Screen Declaration Begins (HTML/CSS)-->
+    <div class="floating-text">Musée</div>
+    <div class="click-text">Click anywhere to enter</div>
+    <div id="fade"></div>
+
+    <!-- Declaration for intro popup -->
+    <div id="introModal" class="modal">
+       <div class="modal-content">
+           <h2>Welcome to Musée!</h2>
+           <p>This is an interactive experience that showcases the professional projects of Daniel Hiss, web designer/developer. Use the WASD keys to move around and explore.</p>
+           <p>W - Move Forward</p>
+           <p>A - Move Left</p>
+           <p>S - Move Backward</p>
+           <p>D - Move Right</p>
+           <button id="startButton">Let's go!</button>
+        </div>
+    </div>
+
+    <!-- Below is the HTML declarations for each of the exhibits. -->
+
+    <!-- Modal for Web Design/Placeholder 1 -->
+    <div id="infoModal-placeholder" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal-placeholder')">&times;</span>
+            <h2 id="modalTitle-placeholder">Web Design Experience</h2>
+            <div id="modalText-placeholder">
+                <div class="web-design-container">
+                    <div class="web-design-experience">
+                        <h3>Web Design Intern for Allegheny County</h3>
+                        <div class="county-picture">
+                            <img src="images/portfolio/allegheny-county.png" alt="Allegheny County Website"
+                                style="width:100%; height:auto;">
+                        </div>
+                        <p>
+                            Conducted daily edits and website maintenance for the Allegheny County website, while
+                            maintaining site architecture, integrity, and functionality. Updated and helped revamp
+                            multiple projects on the Allegheny County site, including:
+                        </p>
+                        <ul>
+                            <li><a href="https://www.alleghenycounty.us/Services/Children-and-Families/Family-and-Child-Health-Programs"
+                                    target="_blank">Nurse-Family Partnership</a></li>
+                            <li><a href="https://www.alleghenycounty.us/Government/Employment" target="_blank">Careers
+                                    and Employement</a></li>
+                            <li><a href="https://www.alleghenycounty.us/Services/County-Assistance"
+                                    target="_blank">County Assistance</a></li>
+                            <li><a href="https://www.alleghenycounty.us/Parks-and-Events/Parks" target="_blank">Parks
+                                    and Special Events</a></li>
+                        </ul>
+                    </div>
+                    <div class="web-design-projects">
+                        <h3>Freelance Web Design Projects</h3>
+                        <p>
+                            Built websites for external clients, such as:
+                        </p>
+                        <ul>
+                            <li><strong>Watercolors by Miriam</strong> - A local painting business. </li>
+                            <li><strong>Deep Run High School Marching Band</strong> - High School Band Website </li>
+
+                        </ul>
+                    </div>
+                    <div class="teaching-experience">
+                        <h3>Teaching</h3>
+                        <p>
+                            Worked as both an Assistant Instructor and Lead Instructor for <a
+                                href="https://blackrocket.com/" target="_blank">Black Rocket Summer Camps</a>, a
+                            technology-based summer camp that teaches kids how to:
+                        </p>
+                        <ul>
+                            <li>Design their own websites</li>
+                            <li>Code programs</li>
+                            <li>Make video games</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Game Design/Placeholder 2 -->
+    <div id="infoModal-placeholder2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal-placeholder2')">&times;</span>
+            <h2 id="modalTitle-placeholder2">Game Design Experience</h2>
+            <div id="modalText-placeholder2">
+                <div class="game-design-container">
+                    <div class="game-design-picture">
+                        <img src="images/portfolio/apothocaric.png" alt="fantasy potion shop" style="width:100%; height:auto;">
+                    </div>
+                    <div class="game-design-projects">
+                        <h3>Apothocaric</h3>
+                        <p>
+                            <!-- update the game download when finished. -->
+                            Apothocaric is a roll-and-write game. Each round, players roll dice and mark the results on
+                            their playersheet. You’ll gather ingredients to brew potions, improve your shop’s
+                            capabilities, and sell your creations for gold. At the end of the game, whichever potion
+                            shop has gained the most reputation wins and will be hailed as the greatest apothecary in
+                            history. Download the <a
+                                href="files/Predicting Employment Rates for Fresh College Graduates.ipynb"
+                                target="_blank">game materials here.</a>
+                        </p>
+                    </div>
+                    <div class="game-design-projects">
+                        <h3>The Last Hero</h3>
+                        <p>
+                            The Last Hero follows the protagonist, a hero who died a hundred years ago, to the sinister
+                            Paragol. Without the hero’s efforts, the kingdom of Thoron has fallen to Paragol. Now,
+                            revived and tasked with retaking his kingdom, the hero must rise against the forces of evil.
+                            It exists in the Metroidvania genre, which includes games such as Hollow Knight and
+                            Castlevania: Symphony of the Night, and is known for its side-scrolling action combat and
+                            exploration. This demo includes the first section of the game, with three distinct zones.
+                        </p>
+                    </div>
+                    <div class="game-design-projects">
+                        <h3>Stay</h3>
+                        <p>
+                            Stay is a text-based game designed in Twine. It details the story of a character trying to
+                            leave their house, as things begin to go wrong, and nothing is as it seems. It's a
+                            throw-back to old text based games like Zork! and other text-based titles. The game is
+                            downloadable in a .html file format <a href="Stay.html" target="_blank">here.</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Data Analysis/Placeholder 3 -->
+    <div id="infoModal-placeholder3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal-placeholder3')">&times;</span>
+            <h2 id="modalTitle-placeholder3">Data Analysis Experience</h2>
+            <div id="modalText-placeholder3">
+                <div class="data-analysis-container">   
+                    <div class="data-analysis-picture">
+                        <img src="images/portfolio/data-analysis.png" alt="plots of Data Analysis" style="width:100%; height:auto;">
+                    </div>
+                    <div class="data-analysis-projects">
+                        <h3>Predicting Employment Rates for Fresh College Graduates</h3>
+                        <p>
+                            Research Project focused on finding which majors have the highest likelihood to have
+                            employment for college graduates within six months of graduation.
+                            <br>
+                        <div class="download-links"> <a
+                                href="Predicting Employment Rates for Fresh College Graduates.ipynb"
+                                target="_blank">Download Project</a> &nbsp; &nbsp; &nbsp; &nbsp; <a
+                                href="data/recent-grads.csv" target="_blank">Download Data</a> </div>
+                        </p>
+                    </div>
+                    <div class="data-analysis-projects">
+                        <h3>Classification</h3>
+                        <p>
+                            Data Analysis Assignment focused on building classification models (Naive Bayes, Logistic
+                            Regression, and K-Nearest Neighbors) to explore Loan Approval.
+                            <br>
+                        <div class="download-links"> <a href="files/DJH Assignment 4 - Classification.ipynb"
+                                target="_blank">Download Project</a>
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            <a href="data/loan_data.csv" target="_blank">Download Data</a>
+                        </div>
+                        </p>
+                    </div>
+                    <div class="data-analysis-projects">
+                        <h3>Liner Regression</h3>
+                        <p>
+                            Data Analysis Assignment focused on building linear regression models to explore Life
+                            Expectancy.
+                            <br>
+                        <div class="download-links"> <a href="files/Assignment 3 - Linear Regression.ipynb"
+                                target="_blank">Download Project</a>
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            <a href="data/life_expectancy.csv" target="_blank">Download Data</a>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Info Desk-->
+    <div id="infoModal-placeholder4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal-placeholder4')">&times;</span>
+            <h2 id="modalTitle-placeholder4">Information Desk</h2>
+            <div class="musee-description">
+                <h1>Welcome to Musée!</h1>
+                <p>
+                    This is an interactive experience that shows off the professional projects of Daniel Hiss, web designer/developer.
+                    Please feel free to walk around and explore at your own pace!
+                </p>
+            </div>
+            <div id="modalText-placeholder4">
+                <div class="about-me-container">
+                    <div class="headshot">
+                        <img src="images/hiss_headshot.JPG" alt="Daniel Hiss"
+                            style="width:100%; height:auto; border-radius: 50%;">
+                    </div>
+                    <div class="personal-info">
+                        <h3>Daniel Hiss</h3>
+                        <p>Web Developer | Designer</p>
+                        <ul>
+                            <li>Email: <a href="mailto:danieljhiss@gmail.com">danieljhiss@gmail.com</a></li>
+                            <li>LinkedIn: <a href="https://www.linkedin.com/in/daniel-hiss-499772208/" target="_blank">Daniel Hiss</a></li>
+                        </ul>
+                        <p>
+                            <a href="UX Resume.pdf" target="_blank" class="resume-link">Download Resume</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="about-me-description">
+                    <h3>About Me</h3>
+                    <p>
+                        I am a passionate web developer with a knack for creating beautiful and functional websites. My
+                        journey in web development started with a curiosity for how websites work and has grown into a
+                        full-fledged career. I'm in my senior year of college at the University of Pittsburgh, currently
+                        pursuing a major in Digital Narrative and Interactive Design (DNID), as well as minors in
+                        Computer Science, Information Science, and Creative Writing.
+                    </p>
+                    <p>
+                        Over the years, I have worked on numerous projects, ranging from small business websites to
+                        large-scale web applications, including helping design the Allgeheny County Website. My
+                        expertise lies in front-end development - but I'm also profiecient in a number of backend
+                        languages. I am always eager to learn new skills and stay updated with the latest trends in the
+                        industry.
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me working on new tech projects, finishing a game, or reading a good
+                        book.
+                    </p>
+                </div>
+                <div class="credits">
+                    <h3>Credits</h3>
+                    <p>
+                        Site Design: Daniel Hiss
+                        <br>
+                        Modeling and Texturing: Daniel Hiss, Rigmodels (for museum model, wall sconce, couch), SketchUp Textures (floor tiles), SketchFab (PS1 Controller)
+                        <br>
+                        Inspiration: Henry Heffernan, Alyssa Adams
+                        <br>
+                        Special Thanks: Aubrey Majchrowski, Sydney Rodriguez, You!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Styling for Modals/Exhibits -->
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;    
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .game-design-container,
+        .data-analysis-container,
+        .web-design-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .game-design-projects,
+        .data-analysis-projects,
+        .web-design-experience,
+        .web-design-projects,
+        .teaching-experience {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .game-design-projects h3,
+        .data-analysis-projects h3,
+        .web-design-experience h3,
+        .web-design-projects h3,
+        .teaching-experience h3,
+        .personal-info h3,
+        .about-me-description h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .game-design-projects p,
+        .data-analysis-projects p,
+        .web-design-experience p,
+        .web-design-projects p,
+        .teaching-experience p,
+        .personal-info p,
+        .about-me-description p
+        .credit p{
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .game-design-projects a,
+        .data-analysis-projects a,
+        .web-design-projects a,
+        .personal-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .game-design-projects a:hover,
+        .data-analysis-projects a:hover,
+        .web-design-projects a:hover,
+        .personal-info a:hover {
+            text-decoration: underline;
+        }
+
+        .data-analysis-projects .download-links {
+            text-align: center;
+        }
+
+        .web-design-experience ul,
+        .web-design-projects ul,
+        .teaching-experience ul,
+        .personal-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .web-design-experience ul li,
+        .web-design-projects ul li,
+        .teaching-experience ul li,
+        .personal-info ul li {
+            margin: 5px 0;
+        }
+
+        .about-me-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .headshot {
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+            margin-left: 90px;
+        }
+
+        .musee-description h1 {
+            text-align: center;
+        }
+
+        .personal-info,
+        .musee-description {
+            flex: 2;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .resume-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: white;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .resume-link:hover {
+            background-color: #0056b3;
+        }
+
+        .about-me-description {
+            margin-top: 20px;
+        }
+
+        .enter-text {
+            position: absolute;
+            left: 50%;
+            top: 90%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 2vw;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+
+        #fade, #introModal, .modal {
+            display: none;
+        }
+
+
+    </style>
+
+    <!-- Downloading Packages to Use for the Project -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/MTLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fflate/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/FBXLoader.js"></script>
+    <!-- Begin Scripting -->
+    <script>
+        //creates scene, lighting, rendering, etc.
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7.5).normalize();
+        scene.add(directionalLight);
+
+        const keys = { forward: false, backward: false, left: false, right: false };
+        const avatarSpeed = 0.05;
+
+        //creates anything that will be a solid reference 
+        let isMoving = false;
+
+        let runningAction, idleAction, activeAction;
+
+        let titleModel, avatarModel, mixer;
+        let floorBox, backWallBox, avatarBox;
+        let stopAnimation = false, stopFlip = true;
+        let rotationDirection = 1, currentRotation = 0;
+        const rotationSpeed = 0.1;
+
+        const geometry = new THREE.BoxGeometry(0.00000001, 0.00000001, 0.00000001);
+        const material = new THREE.MeshBasicMaterial();
+
+        const placeholder = new THREE.Mesh(geometry, material);
+        placeholder.position.set(-10, -4.5, 0);
+        placeholder.name = "placeholder";
+
+        const placeholder2 = new THREE.Mesh(geometry, material);
+        placeholder2.position.set(10, -4.5, 0);
+        placeholder2.name = "placeholder2";
+
+        const placeholder3 = new THREE.Mesh(geometry, material);
+        placeholder3.position.set(0, -4.5, -10);
+        placeholder3.name = "placeholder3";
+
+        const placeholder4 = new THREE.Mesh(geometry, material);
+        placeholder4.position.set(0, -4.85, 0);
+        placeholder4.name = "placeholder4";
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+                document.body.addEventListener('click', handleClick);
+            });
+
+        //movement!
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'w' || event.key === 'W') keys.forward = true;
+            if (event.key === 's' || event.key === 'S') keys.backward = true;
+            if (event.key === 'a' || event.key === 'A') keys.left = true;
+            if (event.key === 'd' || event.key === 'D') keys.right = true;
+        });
+
+        document.addEventListener('keyup', (event) => {
+            if (event.key === 'w' || event.key === 'W') keys.forward = false;
+            if (event.key === 's' || event.key === 'S') keys.backward = false;
+            if (event.key === 'a' || event.key === 'A') keys.left = false;
+            if (event.key === 'd' || event.key === 'D') keys.right = false;
+        });
+
+        //loading museum
+
+        function loadModels() {
+            const mtlLoader = new THREE.MTLLoader();
+            mtlLoader.load('museum.mtl', (materials) => {
+                materials.preload();
+                const objLoader = new THREE.OBJLoader();
+                objLoader.setMaterials(materials);
+                objLoader.load('musuem.obj', (object) => {
+                    titleModel = object;
+                    titleModel.position.set(0, -2, 0);
+                    titleModel.rotation.y = -Math.PI;
+                    scene.add(titleModel);
+                });
+            });
+        }
+
+        //loading avatar
+
+        function loadAvatar() {
+            const fbxLoader = new THREE.FBXLoader();
+            fbxLoader.load('objects/Avatar.fbx', (object) => {
+                avatarModel = object;
+                avatarModel.scale.set(0.012, 0.012, 0.012);
+                avatarModel.position.set(0, -4.85, 8);
+                avatarModel.rotation.set(0, -3.14159, 0);
+                scene.add(avatarModel);
+
+                avatarBox = new THREE.Box3().setFromObject(avatarModel);
+
+                const heightOffset = 1;
+                avatarBox.min.y += heightOffset;
+                avatarBox.max.y += heightOffset;
+
+                mixer = new THREE.AnimationMixer(avatarModel);
+
+                const animations = object.animations;
+                console.log('Available Animations:', animations.map(clip => clip.name));
+
+                idleAction = mixer.clipAction(animations.find(clip => clip.name.toLowerCase().includes('idle')));
+                runAction = mixer.clipAction(animations.find(clip => clip.name.toLowerCase().includes('run')));
+
+                idleAction.loop = THREE.LoopRepeat;
+                runAction.loop = THREE.LoopRepeat;
+
+                activeAction = idleAction;
+                activeAction.play();
+            });
+        }
+
+        //loading placeholders and moving objects
+
+        let exclamationModel;
+        let currentExhibitIndex = 0;
+        const exhibitPositions = [
+            { name: "placeholder4", position: new THREE.Vector3(0, -2.85, 0) },
+            { name: "placeholder", position: new THREE.Vector3(-9, -2.5, 0) },
+            { name: "placeholder3", position: new THREE.Vector3(0, -2.5, -9) },
+            { name: "placeholder2", position: new THREE.Vector3(9, -2.5, 0) }
+        ];
+
+        function loadExclamation() {
+            const fbxLoader = new THREE.FBXLoader();
+            fbxLoader.load('objects/exclaimation.fbx', (object) => {
+                exclamationModel = object;
+                exclamationModel.scale.set(0.004, 0.004, 0.004);
+                exclamationModel.position.copy(exhibitPositions[currentExhibitIndex].position);
+                scene.add(exclamationModel);
+            });
+        }
+
+        //function for fluid animation swapping
+
+        function switchAnimation(newAction) {
+            if (activeAction !== newAction) {
+                activeAction.fadeOut(0.1); // 
+                newAction.reset().fadeIn(0.1).play();
+                activeAction = newAction;
+            }
+        }
+
+        loadModels();
+
+        //setting camera
+        camera.position.set(0, 0.2, 3);
+        camera.lookAt(0, -1.5, 0);
+
+
+        //controlling clicking on the title screen
+        function handleClick() {
+            document.querySelector('.floating-text').style.display = 'none';
+            document.querySelector('.click-text').style.display = 'none';
+
+            camera.position.set(0, 0, 3);
+            const targetPosition = new THREE.Vector3(0, -2, 0);
+            const startPosition = camera.position.clone();
+            const startTime = performance.now();
+
+            function animateCamera(timestamp) {
+                const elapsed = timestamp - startTime;
+                const t = Math.min(elapsed / 2000, 1);
+
+                if (currentRotation < 90) currentRotation += 1;
+                else if (currentRotation > 90) currentRotation -= 1;
+                else { stopAnimation = true; stopFlip = false; }
+
+                camera.position.lerpVectors(startPosition, targetPosition, t);
+                camera.lookAt(titleModel.position);
+
+                if (t < 1) requestAnimationFrame(animateCamera);
+                else {
+                    document.getElementById('fade').style.opacity = 1;
+                    setTimeout(loadLobbyScene, 1000);
+                }
+            }
+
+            requestAnimationFrame(animateCamera);
+        }
+
+        document.body.addEventListener('click', handleClick);
+
+        function checkCollision(objectBox, targetBox) {
+            return objectBox.intersectsBox(targetBox);
+        }
+
+        //controlling avatar animation updates
+
+        function updateAvatar(delta) {
+            if (mixer) mixer.update(delta);
+
+            if (isMoving) {
+                switchAnimation(runAction); // Switch to Running animation
+            } else {
+                switchAnimation(idleAction); // Switch to Idle animation
+            }
+        }
+
+        //movement! and collision checking with other objects.
+
+        function updateAvatarPosition() {
+            if (!avatarModel || !mixer) return;
+
+            const forward = new THREE.Vector3(0, 0, -1);
+            const right = new THREE.Vector3(1, 0, 0);
+            const moveDirection = new THREE.Vector3();
+
+            // Determine movement direction
+            if (keys.forward) moveDirection.add(forward);
+            if (keys.backward) moveDirection.sub(forward);
+            if (keys.left) moveDirection.sub(right);
+            if (keys.right) moveDirection.add(right);
+
+            moveDirection.normalize().multiplyScalar(avatarSpeed);
+            const newAvatarPosition = avatarModel.position.clone().add(moveDirection);
+
+            // Update position and handle collisions
+            avatarModel.position.add(moveDirection);
+            avatarBox.setFromObject(avatarModel);
+            const heightOffset = 0.5;
+            avatarBox.min.y += heightOffset;
+            avatarBox.max.y += heightOffset;
+
+            if (checkCollision(avatarBox, floorBox) ||
+                checkCollision(avatarBox, backWallBox) ||
+                checkCollision(avatarBox, invisibleWallBox) ||
+                checkCollision(avatarBox, leftWallBox) ||
+                checkCollision(avatarBox, rightWallBox) ||
+                checkCollision(avatarBox, deskBoundingBox) ||
+                checkCollision(avatarBox, cube1Box) ||
+                checkCollision(avatarBox, cube2Box) ||
+                checkCollision(avatarBox, cube3Box) ||
+                checkCollision(avatarBox, columnBox) ||
+                checkCollision(avatarBox, column2Box) ||
+                checkCollision(avatarBox, column3Box) ||
+                checkCollision(avatarBox, column4Box) ||
+                checkCollision(avatarBox, sofaBoundingBox) ||
+                checkCollision(avatarBox, sofa1BoundingBox) ||
+                checkCollision(avatarBox, sofa2BoundingBox) ||
+                checkCollision(avatarBox, sofa3BoundingBox)) {
+                avatarModel.position.sub(moveDirection);
+            }
+
+            // Update animation state based on movement
+            if (moveDirection.length() > 0) {
+                avatarModel.rotation.y = Math.atan2(moveDirection.x, moveDirection.z);
+                if (!isMoving) {
+                    isMoving = true;
+                    runningAction.reset().fadeIn(0.3).play();
+                    idleAction.fadeOut(0.3);
+                }
+            } else {
+                if (isMoving) {
+                    isMoving = false;
+                    idleAction.reset().fadeIn(0.3).play(); 
+                    runningAction.fadeOut(0.3);
+                }
+            }
+
+            if (checkCollision(avatarBox, deskInteractionBox) ||
+                checkCollision(avatarBox, cube1BoundingBox) ||
+                checkCollision(avatarBox, cube2BoundingBox) ||
+                checkCollision(avatarBox, cube3BoundingBox)) {
+                showInteractionHint(true);
+            } else {
+                showInteractionHint(false);
+            }
+
+            // Smooth camera following
+            const offset = new THREE.Vector3(0, 2, 4);
+            const cameraPosition = avatarModel.position.clone().add(offset);
+            camera.position.lerp(cameraPosition, 0.1);
+            camera.lookAt(avatarModel.position);
+        }
+
+        const cameraBounds = new THREE.Box3(
+            new THREE.Vector3(-10, -5, -10),
+            new THREE.Vector3(10, 5, 10) 
+        );
+
+        function restrictCameraPosition() {
+            const pos = camera.position.clone();
+            camera.position.set(
+                THREE.MathUtils.clamp(pos.x, cameraBounds.min.x, cameraBounds.max.x),
+                THREE.MathUtils.clamp(pos.y, cameraBounds.min.y, cameraBounds.max.y),
+                THREE.MathUtils.clamp(pos.z, cameraBounds.min.z, cameraBounds.max.z)
+            );
+        }
+
+        //animation controller (needs to be updated at some point - there's a bug that locks movement speed to frame rate)
+
+        let clock = new THREE.Clock(); 
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const delta = clock.getDelta();
+
+            if (!stopAnimation) currentRotation += rotationSpeed * rotationDirection;
+            if ((currentRotation >= 180 || currentRotation <= 0)) rotationDirection *= -1;
+            if (stopFlip) titleModel.rotation.y = THREE.MathUtils.degToRad(currentRotation);
+
+            updateAvatar(delta);
+
+            updateAvatarPosition();
+
+            restrictCameraPosition();
+
+            if (exclamationModel) {
+                exclamationModel.position.y += Math.sin(Date.now() * 0.005) * 0.01;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        //load second scene!
+
+        function loadLobbyScene() {
+            document.body.removeEventListener('click', handleClick);
+            scene.clear();
+            scene.add(ambientLight);
+
+            scene.add(placeholder);
+            scene.add(placeholder2);
+            scene.add(placeholder3);
+            scene.add(placeholder4);
+
+            showIntroModal();
+
+            window.addEventListener('keydown', (event) => {
+                if (event.code === 'Space') {
+                    triggerInteraction();
+                }
+            });
+
+            const textureLoader = new THREE.TextureLoader();
+            const floorTexture = textureLoader.load('textures/floortexture.jpg'); 
+            floorTexture.wrapS = THREE.RepeatWrapping;
+            floorTexture.wrapT = THREE.RepeatWrapping;
+            floorTexture.repeat.set(4, 4);
+
+            const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
+
+            const floor = new THREE.Mesh(
+                new THREE.PlaneGeometry(20, 20),
+                floorMaterial
+            );
+            floor.rotation.x = -Math.PI / 2;
+            floor.position.y = -5;
+            scene.add(floor);
+            floorBox = new THREE.Box3().setFromObject(floor);
+
+            const backWall = new THREE.Mesh(
+                new THREE.BoxGeometry(20, 10, 0.1),
+                new THREE.MeshStandardMaterial({ color: 0x333333 })
+            );
+            backWall.position.set(0, 0, -10);
+            scene.add(backWall);
+            backWallBox = new THREE.Box3().setFromObject(backWall);
+
+            const invisibleWall = new THREE.Mesh(
+                new THREE.BoxGeometry(20, 10, 0.1),
+                new THREE.MeshStandardMaterial({ opacity: 0, transparent: true })
+            );
+            invisibleWall.position.set(0, 0, 10);
+            scene.add(invisibleWall);
+            invisibleWallBox = new THREE.Box3().setFromObject(invisibleWall);
+
+            const leftWall = new THREE.Mesh(
+                new THREE.BoxGeometry(0.1, 10, 20),
+                new THREE.MeshStandardMaterial({ color: 0x444444 })
+            );
+            leftWall.position.set(-10, 0, 0);
+            scene.add(leftWall);
+            leftWallBox = new THREE.Box3().setFromObject(leftWall);
+
+            const rightWall = new THREE.Mesh(
+                new THREE.BoxGeometry(0.1, 10, 20),
+                new THREE.MeshStandardMaterial({ color: 0x444444 })
+            );
+            rightWall.position.set(10, 0, 0);
+            scene.add(rightWall);
+            rightWallBox = new THREE.Box3().setFromObject(rightWall);
+
+            const fbxLoader = new THREE.FBXLoader();
+            fbxLoader.load('objects/display.fbx', (object) => {
+                const cube1 = object;
+                cube1.scale.set(0.01, 0.01, 0.01);
+                cube1.position.set(-9, -4.5, 0); 
+                scene.add(cube1);
+                cube1Box = new THREE.Box3().setFromObject(cube1);
+                cube1BoundingBox = new THREE.Box3().setFromObject(cube1);
+                cube1BoundingBox.expandByScalar(1.5);
+            });
+
+            fbxLoader.load('objects/web-development.fbx', (object) => {
+                const text1 = object;
+                text1.scale.set(0.002, 0.0005, 0.002);
+                text1.position.set(-8.5, -4.5, 0.9);
+                text1.rotation.set(1.5708, 0, -1.5708);
+                scene.add(text1);
+            })
+
+            fbxLoader.load('objects/display.fbx', (object) => {
+                const cube2 = object;
+                cube2.scale.set(0.01, 0.01, 0.01);
+                cube2.position.set(9.3, -4.5, 0);
+                scene.add(cube2);
+                cube2Box = new THREE.Box3().setFromObject(cube2);
+                cube2BoundingBox = new THREE.Box3().setFromObject(cube2);
+                cube2BoundingBox.expandByScalar(1.5);
+            })
+
+            fbxLoader.load('objects/game-design.fbx', (object) => {
+                const text2 = object;
+                text2.scale.set(0.002, 0.0005, 0.002);
+                text2.position.set(8.9, -4.5, -0.6);
+                text2.rotation.set(1.5708, 0, 1.5708);
+                scene.add(text2);
+            })
+
+
+            fbxLoader.load('objects/display2.fbx', (object) => {
+                const cube3 = object;
+                cube3.scale.set(0.01, 0.01, 0.01);
+                cube3.position.set(0, -4.5, -9.3);
+                cube3.rotation.set(0, 1.5708, 0);
+                scene.add(cube3);
+                cube3Box = new THREE.Box3().setFromObject(cube3);
+                cube3BoundingBox = new THREE.Box3().setFromObject(cube3);
+                cube3BoundingBox.expandByScalar(1.5);
+            })
+
+            fbxLoader.load('objects/data-analysis.fbx', (object) => {
+                const text3 = object;
+                text3.scale.set(0.002, 0.0005, 0.002);
+                text3.position.set(-0.5, -4.5, -8.8);
+                text3.rotation.set(1.5708, 0, 0);
+                scene.add(text3);
+            })
+
+            const objLoader = new THREE.OBJLoader();
+            objLoader.load('objects/cursor.obj', (object) => {
+                cursor = object;
+                cursor.scale.set(0.1, 0.1, 0.1);
+                cursor.rotation.set(0, 1.5708, 0);
+                cursor.position.set(-9., -4, 0); 
+                scene.add(cursor);
+            });
+
+            fbxLoader.load('objects/ps1.fbx', (object) => {
+                const ps1 = object;
+                ps1.scale.set(0.0005, 0.0005, 0.0005);
+                ps1.position.set(9.3, -4, 0);
+                ps1.rotation.set(0, -1.5708, 0);
+                scene.add(ps1);
+            })
+
+            fbxLoader.load('objects/columns.fbx', (object) => {
+                const column = object;
+                column.scale.set(0.006, 0.006, 0.006);
+                column.position.set(9, -5, 9);
+                scene.add(column);
+                columnBox = new THREE.Box3().setFromObject(column);
+
+                column2 = column.clone();
+                column2.scale.set(0.006, 0.006, 0.006);
+                column2.position.set(-9, -5, 9);
+                scene.add(column2);
+                column2Box = new THREE.Box3().setFromObject(column2);
+                
+                column3 = column.clone();
+                column3.scale.set(0.006, 0.006, 0.006);
+                column3.position.set(-9, -5, -9);
+                scene.add(column3);
+                column3Box = new THREE.Box3().setFromObject(column3);
+                
+                column4 = column.clone();
+                column4.scale.set(0.006, 0.006, 0.006);
+                column4.position.set(9, -5, -9);
+                scene.add(column4);
+                column4Box = new THREE.Box3().setFromObject(column4);
+            })            
+
+            const spotlight = new THREE.SpotLight(0xebb866, 0.6);
+            spotlight.angle = 3.14159;
+            spotlight.penumbra = 0.1;
+            spotlight.decay = 2;
+            spotlight.distance = 50;
+            spotlight.position.set(5, 1, 1);
+
+            const radiusTop = 1.5;
+            const radiusBottom = 1.5;
+            const height = 3;
+            const radialSegments = 16;
+
+            fbxLoader.load('objects/info-desk.fbx', (object) => {
+                const infoDesk = object;
+                infoDesk.scale.set(0.01, 0.01, 0.01);
+                infoDesk.position.set(0, -4.85, 0);
+                scene.add(infoDesk);
+
+                const infoDesk2 = infoDesk.clone();
+                deskBoundingBox = new THREE.Box3().setFromObject(infoDesk2);
+                deskInteractionBox = new THREE.Box3().setFromObject(infoDesk);
+                deskInteractionBox.expandByScalar(2);
+            },
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+                },
+                (error) => {
+                    console.error('An error occurred while loading the FBX model:', error);
+                });
+
+            fbxLoader.load('objects/walllamp.fbx', (object) => {
+                const wallLamp = object;
+                const spotlight1 = spotlight.clone();
+                wallLamp.scale.set(0.002, 0.002, 0.002); 
+                wallLamp.position.set(-9.85, -2.5, 0); 
+                wallLamp.rotation.set(0, 1.5708, 0)
+                spotlight1.position.set(-9, -2.5, 0)
+                wallLamp.add(spotlight1);
+
+                scene.add(wallLamp);
+
+                const wallLamp1 = wallLamp.clone();
+                const spotlight2 = spotlight.clone();
+                wallLamp1.position.set(9.85, -2.5, 0);  
+                wallLamp1.rotation.set(0, -1.5708, 0)
+                wallLamp1.add(spotlight2);
+
+                scene.add(wallLamp1);
+
+                const wallLamp2 = wallLamp.clone();
+                const spotlight3 = spotlight.clone();
+                wallLamp2.position.set(0, -2.5, -9.85); 
+                wallLamp2.rotation.set(0, 0, 0)
+                wallLamp2.add(spotlight3);
+
+                scene.add(wallLamp2);
+            },
+                (xhr) => {
+                    console.log('wall lamp ' + (xhr.loaded / xhr.total) * 100 + '% loaded');
+                },
+                (error) => {
+                    console.error('An error occurred while loading the wall lamp model:', error);
+                });
+
+            fbxLoader.load('objects/sofa.fbx', (object) => {
+                const sofa = object;
+                sofa.scale.set(0.01, 0.01, 0.01);
+                sofa.position.set(-7, -4.9, 6);
+                sofa.rotation.set(0, 1.5708, 0)
+                sofaBoundingBox = new THREE.Box3().setFromObject(sofa);;
+
+                scene.add(sofa);
+
+                const sofa1 = sofa.clone();
+                sofa1.position.set(7, -4.9, 6);
+                sofa1.rotation.set(0, -1.5708, 0)
+                sofa1BoundingBox = new THREE.Box3().setFromObject(sofa1);
+
+                scene.add(sofa1);
+
+                const sofa2 = sofa.clone();
+                sofa2.position.set(-7, -4.9, -6);
+                sofa2.rotation.set(0, 1.5708, 0)
+                sofa2BoundingBox = new THREE.Box3().setFromObject(sofa2);
+
+                scene.add(sofa2);
+
+                const sofa3 = sofa.clone();
+                sofa3.position.set(7, -4.9, -6);
+                sofa3.rotation.set(0, -1.5708, 0)
+                sofa3BoundingBox = new THREE.Box3().setFromObject(sofa3);
+
+                scene.add(sofa3);
+
+            },
+                (xhr) => {
+                    console.log('wall lamp ' + (xhr.loaded / xhr.total) * 100 + '% loaded');
+                },
+                (error) => {
+                    console.error('An error occurred while loading the wall lamp model:', error);
+                });
+            loadExclamation();
+
+            loadAvatar();
+
+            document.getElementById('fade').style.opacity = 0;
+        }
+
+        //controlling functions in the second scene
+
+        function triggerInteraction() {
+            const interactiveObjects = [placeholder, placeholder2, placeholder3, placeholder4];
+            const nearestObject = getNearestObject(avatarModel, interactiveObjects);
+            if (nearestObject) {
+                showInfoModal(nearestObject);
+                if (isExclamationHoveringOver(nearestObject)) {
+                    moveExclamationToNextExhibit();
+                }
+            } else {
+                console.log("No object nearby to interact with.");
+            }
+        }
+
+        function showIntroModal() {
+                const introModal = document.getElementById('introModal');
+                const startButton = document.getElementById('startButton');
+
+                introModal.style.display = 'block';
+
+                startButton.addEventListener('click', () => {
+                    introModal.style.display = 'none';
+                });
+            }
+
+        function moveExclamationToNextExhibit() {
+            currentExhibitIndex++;
+            if (currentExhibitIndex < exhibitPositions.length) {
+                exclamationModel.position.copy(exhibitPositions[currentExhibitIndex].position);
+            } else {
+                scene.remove(exclamationModel);
+            }
+        }
+
+        function isExclamationHoveringOver(nearestObject) {
+            return nearestObject.name === exhibitPositions[currentExhibitIndex].name;
+        }
+
+        function getNearestObject(player, objects) {
+            let nearestObject = null;
+            let minDistance = 3;
+            objects.forEach((object, index) => {
+                const distance = player.position.distanceTo(object.position);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestObject = object;
+                }
+            });
+            return nearestObject;
+        }
+
+        function showInfoModal(object) {
+            const modalId = "infoModal-" + object.name;
+            const modal = document.getElementById(modalId);
+            const modalTitle = document.getElementById("modalTitle-" + object.name);
+            const modalText = document.getElementById("modalText-" + object.name);
+
+            console.log("Modal ID:", modalId);
+            console.log("Modal:", modal);
+            console.log("Modal Title:", modalTitle);
+            console.log("Modal Text:", modalText);
+
+            if (modal) {
+                modal.style.display = "block";
+
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            } else {
+                console.error("Modal elements not found for object:", object.name);
+            }
+        }
+
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+
+        let interactionHint = document.createElement('div');
+        interactionHint.style.position = 'absolute';
+        interactionHint.style.bottom = '10px';
+        interactionHint.style.left = '50%';
+        interactionHint.style.transform = 'translateX(-50%)';
+        interactionHint.style.padding = '10px';
+        interactionHint.style.background = 'rgba(0, 0, 0, 0.5)';
+        interactionHint.style.color = 'white';
+        interactionHint.style.fontSize = '16px';
+        interactionHint.style.display = 'none';
+        interactionHint.textContent = 'Press SPACE to interact';
+        document.body.appendChild(interactionHint);
+
+        function showInteractionHint(visible) {
+            interactionHint.style.display = visible ? 'block' : 'none';
+        }
+
+        function updateBoundingBoxes() {
+            if (avatarModel) {
+                avatarBox = new THREE.Box3().setFromObject(avatarModel);
+
+                const shrinkFactor = 0.4;
+                const boxSize = new THREE.Vector3();
+                avatarBox.getSize(boxSize);
+
+                const center = new THREE.Vector3();
+                avatarBox.getCenter(center)
+
+                const halfSize = boxSize.multiplyScalar(shrinkFactor / 2);
+                avatarBox.min.copy(center.clone().sub(halfSize));
+                avatarBox.max.copy(center.clone().add(halfSize));
+
+            }
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+
+</html>
